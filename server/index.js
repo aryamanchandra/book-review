@@ -24,6 +24,18 @@ connection.once('open', () => {
 const booksRoutes = require('./routes/books');
 app.use('/api/books', booksRoutes);
 
+const Book = require('./models/Book');
+
+// Route to get unique genres
+app.get('/api/genres', async (req, res) => {
+  try {
+    const genres = await Book.distinct('genre');
+    res.json(genres);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
