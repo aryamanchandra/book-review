@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
 
-// Route to get all books
 router.get('/', async (req, res) => {
   try {
     const books = await Book.find();
@@ -12,7 +11,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route to add a new book review
 router.post('/', async (req, res) => {
   const newBook = new Book({
     title: req.body.title,

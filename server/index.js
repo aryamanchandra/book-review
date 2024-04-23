@@ -20,13 +20,11 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-// Routes
 const booksRoutes = require('./routes/books');
 app.use('/api/books', booksRoutes);
 
 const Book = require('./models/Book');
 
-// Route to get unique genres
 app.get('/api/genres', async (req, res) => {
   try {
     const genres = await Book.distinct('genre');

@@ -4,7 +4,7 @@ const HomePage = () => {
   return (
     <section className="hero">
       <div className="container">
-        <h1>Welcome to the Book Review App</h1>
+        <h1>Welcome to the Book Review</h1>
         <p>
           Explore a vast collection of books and share your thoughts with fellow
           readers. Discover new titles, authors, and genres, and leave your

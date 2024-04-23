@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import ContactPage from './components/ContactPage';
 import BookList from './components/BookList';
 import AddBookReview from './components/AddBookReview';
+import AboutUsPage from './components/About';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
               <Link to="/contact">Contact</Link>
             </li>
             <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
               <Link to="/books">Book Reviews</Link>
             </li>
             <li>
@@ -28,6 +32,7 @@ function App() {
 
         <Routes>
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
           <Route path="/books" element={<BookList />} />
           <Route path="/add-review" element={<AddBookReview />} />
           <Route path="/" element={<HomePage />} />

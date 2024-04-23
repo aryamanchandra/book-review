@@ -6,6 +6,8 @@ const BookList = () => {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -13,21 +15,25 @@ const BookList = () => {
         const response = await axios.get("http://localhost:5000/api/books");
         setBooks(response.data);
         setFilteredBooks(response.data);
+        const uniqueGenres = [
+          ...new Set(response.data.map((book) => book.genre)),
+        ];
+        setGenres(uniqueGenres);
       } catch (err) {
         console.error(err);
       }
     };
     fetchBooks();
 
-    // Load favorites from local storage
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(storedFavorites);
   }, []);
 
-  const handleSearch = (query) => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     const filtered = books.filter((book) => {
       const { title, author, genre } = book;
-      const searchTerms = query.toLowerCase();
+      const searchTerms = searchQuery.toLowerCase();
       return (
         title.toLowerCase().includes(searchTerms) ||
         author.toLowerCase().includes(searchTerms) ||
@@ -64,6 +70,23 @@ const BookList = () => {
     <section>
       <div className="container">
         <h1 className="center">Book Reviews</h1>
+        <form onSubmit={handleSearch} className="searchBar">
+          <input
+            type="text"
+            placeholder="Search books..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ marginRight: "1rem" }}
+          />
+          <button type="submit">Search</button>
+        </form>
+        <div className="genre-buttons">
+          {genres.map((genre, index) => (
+            <button key={index} onClick={() => handleGenreFilter(genre)}>
+              {genre}
+            </button>
+          ))}
+        </div>
         <div className="book-list">
           {filteredBooks.map((book) => (
             <div
@@ -78,42 +101,65 @@ const BookList = () => {
                 <p key={index}>{review.text}</p>
               ))}
               {isFavorite(book) ? (
-                <button onClick={() => handleRemoveFromFavorites(book)}>
+                <button
+                  onClick={() => handleRemoveFromFavorites(book)}
+                  style={{ border: "none" }}
+                >
                   <img
-                    src="../../public/heart-icon-filled.png"
+                    src="./heart-icon-filled.png"
                     alt="Remove from Favorites"
                     className="heart-icon"
+                    style={{ width: "20px", height: "auto" }}
                   />
                 </button>
               ) : (
-                <button onClick={() => handleAddToFavorites(book)}>
+                <button
+                  onClick={() => handleAddToFavorites(book)}
+                  style={{ border: "none", backgroundColor: "#fff" }}
+                >
                   <img
-                    src="../../public/hearticon.png"
+                    src="./hearticon.png"
                     alt="Add to Favorites"
                     className="heart-icon"
+                    style={{ width: "20px", height: "auto" }}
                   />
                 </button>
               )}
             </div>
           ))}
         </div>
-        <h2 className="center">Favorites</h2>
-        <div className="book-list">
-          {favorites.map((book) => (
-            <div key={book._id} className="book">
-              <h2>{book.title}</h2>
-              <p>Author: {book.author}</p>
-              <p>Genre: {book.genre}</p>
-              <h3>Reviews:</h3>
-              {book.reviews.map((review, index) => (
-                <p key={index}>{review.text}</p>
-              ))}
-              <button onClick={() => handleRemoveFromFavorites(book)}>
-                Remove from Favorites
-              </button>
-            </div>
-          ))}
-        </div>
+        <h2 className="center" style={{marginTop:"40px"}}>Favorites</h2>
+        {favorites==[] ? (
+          <h4 style={{textAlign:"center"}}>No favorites as of now.</h4>
+        ) : (
+          <div className="book-list">
+            {favorites.map((book) => (
+              <div
+                key={book._id}
+                className={`book ${isFavorite(book) ? "favorite" : ""}`}
+              >
+                <h2>{book.title}</h2>
+                <p>Author: {book.author}</p>
+                <p>Genre: {book.genre}</p>
+                <h3>Reviews:</h3>
+                {book.reviews.map((review, index) => (
+                  <p key={index}>{review.text}</p>
+                ))}
+                <button
+                  onClick={() => handleRemoveFromFavorites(book)}
+                  style={{ border: "none" }}
+                >
+                  <img
+                    src="./heart-icon-filled.png"
+                    alt="Remove from Favorites"
+                    className="heart-icon"
+                    style={{ width: "20px", height: "auto" }}
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

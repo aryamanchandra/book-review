@@ -17,7 +17,6 @@ const AddBookReview = () => {
         review,
       });
       console.log(response.data);
-      // Reset form fields
       setTitle('');
       setAuthor('');
       setGenre('');
