@@ -41,10 +41,12 @@ const ForumDetails = () => {
       <ul className="comment-list">
         {forum.comments &&
           forum.comments.map((comment, index) => (
+            <div style={{ padding: 20, backgroundColor: "#fff", marginBottom:10 }}>
             <li key={index} className="comment">
               <p className="comment-text">{comment.comment}</p>
               <p className="comment-username">By: {comment.username}</p>
             </li>
+            </div>
           ))}
       </ul>
       <form onSubmit={handleCommentSubmit}>

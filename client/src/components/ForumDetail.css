@@ -11,9 +11,6 @@ a:hover {
   color: #666;
 }
 
-form {
-  margin-top: 20px;
-}
 
 input,
 textarea {
@@ -45,11 +42,6 @@ ul {
 .header {
   display: flex;
   flex-direction: row;
-}
-
-.add-forum-button {
-  margin-left: 20px;
-  margin-top: 5px;
 }
 
 .forum-title {

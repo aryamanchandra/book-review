@@ -60,10 +60,12 @@ const ForumList = () => {
       )}
       <ul>
         {forums.map((forum) => (
-          <li key={forum._id}>
-            <Link to={`/forums/${forum._id}`}>{forum.title}</Link>
-            <p>{forum.description}</p>
-          </li>
+          <div style={{ padding: 20, backgroundColor: "#fff", marginBottom:10 }}>
+            <li key={forum._id}>
+              <Link to={`/forums/${forum._id}`}>{forum.title}</Link>
+              <p>{forum.description}</p>
+            </li>
+          </div>
         ))}
       </ul>
     </div>
