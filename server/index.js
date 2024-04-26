@@ -5,11 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = 5000;
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// MongoDB connection
 mongoose.connect('mongodb://127.0.0.1:27017/book-review-app', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,7 +19,10 @@ connection.once('open', () => {
 });
 
 const booksRoutes = require('./routes/books');
+const forumsRoutes = require('./routes/forums');
+
 app.use('/api/books', booksRoutes);
+app.use('/api/forums', forumsRoutes);
 
 const Book = require('./models/Book');
 

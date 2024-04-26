@@ -1,0 +1,78 @@
+.forum-list-container {
+  padding: 20px;
+}
+a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #666;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input,
+textarea {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+}
+
+button:hover {
+  background-color: #666;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-forum-button {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.forum-title {
+  margin-bottom: 10px;
+}
+
+.forum-description {
+  margin-bottom: 20px;
+}
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment {
+  margin-bottom: 15px;
+}
+
+.comment-text {
+  font-weight: bold;
+}
+
+.comment-username {
+  color: #888;
+}

@@ -5,6 +5,8 @@ import ContactPage from './components/ContactPage';
 import BookList from './components/BookList';
 import AddBookReview from './components/AddBookReview';
 import AboutUsPage from './components/About';
+import ForumList from './components/ForumList';
+import ForumDetails from './components/ForumDetails';
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
             <li>
               <Link to="/add-review">Add Review</Link>
             </li>
+            <li>
+              <Link to="/forums">Forums</Link>
+            </li>
           </ul>
         </nav>
 
@@ -35,6 +40,8 @@ function App() {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/books" element={<BookList />} />
           <Route path="/add-review" element={<AddBookReview />} />
+          <Route path="/forums" element={<ForumList />} />
+          <Route path="/forums/:id" element={<ForumDetails />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
