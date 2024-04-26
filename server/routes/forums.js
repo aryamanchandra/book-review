@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Forum = require('../models/Forum');
 
-// Get all forums
 router.get('/', async (req, res) => {
   try {
     const forums = await Forum.find();
@@ -12,7 +11,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a specific forum
 router.get('/:id', async (req, res) => {
   try {
     const forum = await Forum.findById(req.params.id);
@@ -25,7 +23,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Create a new forum
 router.post('/', async (req, res) => {
   const { title, description } = req.body;
   const newForum = new Forum({ title, description });
@@ -38,7 +35,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Add a comment to a forum
 router.post('/:id/comments', async (req, res) => {
   try {
     const forum = await Forum.findById(req.params.id);
